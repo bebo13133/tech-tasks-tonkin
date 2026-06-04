@@ -9,7 +9,7 @@
 | # | Задача | Stack | Папка | Статус |
 |---|--------|-------|-------|--------|
 | **A** | WP плъгин — `GET /wp-json/mabi/v1/member/{id}` | PHP / WordPress | [`task-a-wp-plugin/`](./task-a-wp-plugin) | ⬜ |
-| **B** | Next.js route — `POST /api/ask-mentor` + Claude | Next.js | [`task-b-ask-mentor/`](./task-b-ask-mentor) | ⬜ |
+| **B** | Next.js route — `POST /api/ask-mentor` + Claude | Next.js | [`task-b-ask-mentor/`](./task-b-ask-mentor) | ✅ |
 | **C** | Миграционен план (3 сървъра, zero-downtime) | DevOps / архитектура | [`task-c-migration-plan/`](./task-c-migration-plan) | ⬜ |
 | **D** | Поправка на счупена Claude интеграция | Claude API | [`task-d-claude-fix/`](./task-d-claude-fix) | ✅ |
 
@@ -18,13 +18,10 @@
 ## Структура
 
 ```
-mabi-test-assignment/
+tech-tasks-tonkin/
 ├── README.md                  ← този файл
-├── task-a-wp-plugin/
-├── task-b-ask-mentor/
-├── task-c-migration-plan/
+├── task-a-wp-plugin/          ⬜ предстои
+├── task-b-ask-mentor/         ✅ готова (Next.js + Claude)
+├── task-c-migration-plan/     ⬜ предстои
 └── task-d-claude-fix/         ✅ готова
-    ├── ai-mentor.js           ← поправена версия
-    ├── ai-mentor-original.js  ← оригинал (за reference)
-    └── README.md
 ```
