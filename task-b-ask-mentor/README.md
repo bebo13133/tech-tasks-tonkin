@@ -91,24 +91,22 @@ npm run dev
 
 ### С curl
 
-> ⚠️ **Кирилица на Windows:** в Git Bash/PowerShell инлайн кирилицата в `-d` може
-> да се развали (терминалът не запазва UTF-8). Затова запиши тялото в **UTF-8 файл**
-> и ползвай `--data-binary @файл`.
+В проекта има готов `request.json` (примерно тяло) — просто го пусни:
 
 ```bash
-# 1) Създай request.json (UTF-8) със съдържание:
-# {"question":"Как да вдигна цените си?","user_context":{"name":"Иван","business_type":"консултантски услуги","monthly_revenue":"25000 €"}}
-
-# 2) Извикай:
 curl -X POST http://localhost:3000/api/ask-mentor \
   -H "Content-Type: application/json" \
   --data-binary @request.json
 
-# Бърза проверка за 400 (ASCII, без файл):
+# Бърза проверка за 400:
 curl -X POST http://localhost:3000/api/ask-mentor \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
+
+> ℹ️ Ползваме файл (`--data-binary @request.json`) вместо инлайн `-d`, защото на
+> Windows (Git Bash/PowerShell) инлайн кирилицата може да се развали — терминалът
+> не запазва UTF-8. Файлът е чист UTF-8, затова минава коректно.
 
 ### С PowerShell
 ```powershell
