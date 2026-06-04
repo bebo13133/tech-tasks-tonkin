@@ -1,6 +1,6 @@
 // ai-mentor.js — ПОПРАВЕНА ВЕРСИЯ
 // AI Ментор на МАБИ, мигриран от OpenAI към Anthropic Claude.
-//
+
 // Оригиналната (счупена) версия е запазена в ai-mentor-original.js.
 // Всяка поправка по-долу е маркирана с „ГРЕШКА #N" и съответства на
 // обясненията в README.md на тази папка.
@@ -39,7 +39,7 @@ async function askMentor(userQuestion, userContext) {
       ],
     });
 
-    // ГРЕШКА #3 (поправена): response.choices[0].message.content е OpenAI формат.
+    // ГРЕШКА #3 (поправеноо): response.choices[0].message.content е OpenAI формат.
     // Anthropic връща масив `content` от блокове; текстът е в content[i].text.
     // Извличаме всички текстови блокове и ги съединяваме — по-устойчиво от
     // твърдо content[0].text (Claude може да върне повече от един блок).

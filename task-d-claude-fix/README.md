@@ -13,7 +13,7 @@ AI Ментор-ът на МАБИ работеше на OpenAI. При мигр
 
 | Файл | Какво е |
 |------|---------|
-| `ai-mentor-original.js` | Оригиналният счупен код (непроменен, за reference) |
+| `ai-mentor-original.js` | Оригиналният счуупен код (непроменен, за reference) |
 | `ai-mentor.js` | Поправената версия с inline коментари `ГРЕШКА #N` |
 
 ---
@@ -50,7 +50,7 @@ messages: [
 `messages[]`** — масивът е само за диалога (`user` / `assistant`). System
 промптът се подава като **отделен top-level параметър** `system`.
 
-Затова в оригинала инструкциите никога не достигаха до модела — Claude
+Затова в оригинала инструкциите никога няма да достигнат  до модела — Claude
 отговаряше без никакъв system prompt, оттам и „неочакваните" отговори.
 
 **Поправка:**
@@ -58,7 +58,7 @@ messages: [
 const response = await client.messages.create({
   model: MODEL,
   max_tokens: 1024,
-  system: systemPrompt,                 // ✅ правилното място
+  system: systemPrompt,                 // правилно
   messages: [{ role: "user", content: userQuestion }],
 });
 ```
@@ -67,7 +67,7 @@ const response = await client.messages.create({
 
 ### Грешка #3 — Извличане на отговора по OpenAI формат
 ```js
-return response.choices[0].message.content;   // ❌ OpenAI shape
+return response.choices[0].message.content;   //  OpenAI 
 ```
 OpenAI връща `choices[].message.content`. **Anthropic връща масив `content`
 от блокове**, всеки със свой `type`; текстът е в `content[i].text`.
@@ -89,7 +89,7 @@ return response.content
 ### Грешка #4 — Никакъв error handling
 Нямаше `try/catch`. Всяка мрежова грешка, rate limit (`429`), невалиден
 ключ (`401`) или overload (`529`) хвърляше необработено изключение и
-сриваше извикващия код.
+сриваше извикващия код. Грешка която и аз съм допускал 
 
 **Поправка:** `try/catch` с лог (без чувствителни данни) и re-throw, за да
 може API слоят над него (Задача B) да върне коректен `502`.
@@ -99,8 +99,7 @@ return response.content
 ### Грешка #5 — Липсващ guard за контекста
 ```js
 function buildSystemPrompt(ctx) {
-  return `... Клиент: ${ctx.name} ...`;   // ❌ срива ако ctx е undefined
-}
+  return `... Клиент: ${ctx.name} ...`;   //  срива ако ctx е undefineд
 ```
 `user_context` е опционален (виж Задача B), но `ctx.name` хвърля
 `TypeError` още преди API извикването, ако `ctx` липсва.
@@ -133,7 +132,7 @@ function buildSystemPrompt(ctx) {
 
 **Изводът:** трите счупени реда (`model`, `system`-в-`messages`,
 `choices[0]...`) са точно местата, където OpenAI и Anthropic се разминават.
-Кодът беше copy-paste от OpenAI с подменен само SDK импорта.
+Кодът беше copy-paste от OpenAI с подменен само SDK импорта на Anthropic.
 
 ---
 
@@ -142,6 +141,8 @@ function buildSystemPrompt(ctx) {
 - **Retry с exponential backoff** за `429` / `529` (вградено в SDK чрез `maxRetries`, или ръчно).
 - **Prompt caching** на system prompt-а (`cache_control`) — при стабилен system prompt спестява tokens и латентност.
 - **Структурирана валидация** на входа (Zod) преди извикването.
+
+### Опциално според изискванията и нуждите:
 - **Streaming** вариант (`client.messages.stream`) за по-добър UX в реалния chatbot.
 - **Unit тест** с мокнат `client.messages.create`, който проверява, че `system` се подава top-level, а не в `messages[]`.
 
