@@ -8,9 +8,9 @@
 
 | # | Задача | Stack | Папка | Статус |
 |---|--------|-------|-------|--------|
-| **A** | WP плъгин — `GET /wp-json/mabi/v1/member/{id}` | PHP / WordPress | [`task-a-wp-plugin/`](./task-a-wp-plugin) | ⬜ |
+| **A** | WP плъгин — `GET /wp-json/mabi/v1/member/{id}` | PHP / WordPress | [`task-a-wp-plugin/`](./task-a-wp-plugin) | ✅ |
 | **B** | Next.js route — `POST /api/ask-mentor` + Claude | Next.js | [`task-b-ask-mentor/`](./task-b-ask-mentor) | ✅ |
-| **C** | Миграционен план (3 сървъра, zero-downtime) | DevOps / архитектура | [`task-c-migration-plan/`](./task-c-migration-plan) | ⬜ |
+| **C** | Миграционен план (3 сървъра, zero-downtime) | DevOps / архитектура | [`task-c-migration-plan/`](./task-c-migration-plan) | ✅ |
 | **D** | Поправка на счупена Claude интеграция | Claude API | [`task-d-claude-fix/`](./task-d-claude-fix) | ✅ |
 
 > Задачи A, B, C са задължителни; D е бонус.
@@ -20,8 +20,8 @@
 ```
 tech-tasks-tonkin/
 ├── README.md                  ← този файл
-├── task-a-wp-plugin/          ⬜ предстои
+├── task-a-wp-plugin/          ✅ готова (WP плъгин + тестове)
 ├── task-b-ask-mentor/         ✅ готова (Next.js + Claude)
-├── task-c-migration-plan/     ⬜ предстои
+├── task-c-migration-plan/     ✅ готова (миграционен план + PDF)
 └── task-d-claude-fix/         ✅ готова
 ```
