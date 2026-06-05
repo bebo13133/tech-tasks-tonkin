@@ -21,3 +21,9 @@ npm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Лични бележки (не се commit-ват)
+обяснения-за-мен.md
+
+# Инструмент за PDF (не е част от deliverable-а)
+md_to_pdf.py
